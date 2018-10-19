@@ -185,21 +185,25 @@ Changing the client program will result in a grade of 0 on the project.
  */
 
 #include <iostream>
+#include <cassert>
 using namespace std;
 
 class Fraction {
     public:
-        void set(int inNumerator, int inDenominator);
+        //void set(int inNumerator, int inDenominator);
+        Fraction();
+        Fraction( int inNumerator, int inDenominator );
         void print();
-        Fraction addedTo(Fraction otherFraction);
-        Fraction subtract(Fraction otherFraction);
-        Fraction multipliedBy(Fraction otherFraction);
-        Fraction dividedBy(Fraction otherFraction);
-        bool isEqualTo(Fraction otherFraction);
+        Fraction addedTo( Fraction otherFraction );
+        Fraction subtract( Fraction otherFraction );
+        Fraction multipliedBy( Fraction otherFraction );
+        Fraction dividedBy( Fraction otherFraction );
+        bool isEqualTo( Fraction otherFraction );
 
     private:
         int numerator;
         int denominator;
+        void simplify();
         Fraction addOrSubtract(bool isAddition, Fraction otherFraction);
 };
 
@@ -208,11 +212,28 @@ class Fraction {
 
 
 
-
-void Fraction::set(int inNumerator, int inDenominator) {
-    numerator = inNumerator;
-    denominator = inDenominator;
+/**
+ * The default constructor, which assigns a default value of 0/1
+ */
+Fraction::Fraction() {
+    numerator = 0;
+    denominator = 1;
 }
+
+
+
+
+
+
+/**
+ * The parameterized constructor that checks if the denominator is 0
+ */
+ Fraction::Fraction(int inNumerator, int inDenominator) {
+     assert(inDenominator != 0);
+     numerator = inNumerator;
+     denominator = inDenominator;
+     simplify();
+ }
 
 
 
@@ -229,15 +250,43 @@ void Fraction::print() {
 
 
 
+/**
+ * Simplifies this Fraction
+ */
+void Fraction::simplify() {
+    //First: check for negative numerators or denominators
+    //       if both are negative, make positive
+    //       if denominator is negative and numerator positive,
+    //              make numerator negative and denominator positive
+    //Second:Before simplifying, check if the numerator is negative
+    //       if so, mark a flag as negative, since you'll be working with
+    //         the absolute value of both the numerator
+    //Third: Find the smallest value between the numerator and denominator
+    //
+    //Fourth:Use a decremental for-loop and a nest conditional statement
+    //       to determine if BOTH the numerator and denominator are divisible
+    //       by the for-loop's variable.
+    //       REMEMBER: the loop has to decrement until it reaches 2, not 1
+}
 
+
+
+
+
+
+/**
+ *
+ * @param isAddition
+ * @param otherFraction
+ * @return
+ */
 Fraction Fraction::addOrSubtract(bool isAddition, Fraction otherFraction) {
-    Fraction temp;
     int crossMultiply1 = numerator * otherFraction.denominator;
     int crossMultiply2 = denominator * otherFraction.numerator;
     int commonDenominator = denominator * otherFraction.denominator;
     int results = (isAddition)? (crossMultiply1 + crossMultiply2) :
                                 (crossMultiply1 - crossMultiply2);
-    temp.set(results, commonDenominator);
+    Fraction temp(results, commonDenominator);
     return temp;
 }
 
@@ -268,9 +317,8 @@ Fraction Fraction::subtract(Fraction otherFraction) {
 
 
 Fraction Fraction::multipliedBy(Fraction otherFraction) {
-    Fraction temp;
-    temp.set((numerator * otherFraction.numerator),
-            (denominator * otherFraction.denominator));
+    Fraction temp((numerator * otherFraction.numerator),
+                  (denominator * otherFraction.denominator));
     return temp;
 }
 
@@ -281,9 +329,8 @@ Fraction Fraction::multipliedBy(Fraction otherFraction) {
 
 
 Fraction Fraction::dividedBy(Fraction otherFraction) {
-    Fraction temp;
-    temp.set((numerator * otherFraction.denominator),
-             (denominator * otherFraction.numerator));
+    Fraction temp((numerator * otherFraction.denominator),
+                  (denominator * otherFraction.numerator));
     return temp;
 }
 
@@ -304,54 +351,8 @@ bool Fraction::isEqualTo(Fraction otherFraction) {
 
 
 int main() {
-    Fraction f1;
-    Fraction f2;
-    Fraction result;
-
-    f1.set(9, 8);
-    f2.set(2, 3);
-
-    cout << "The product of ";
+    Fraction f1(2,4);
     f1.print();
-    cout << " and ";
-    f2.print();
-    cout << " is ";
-    result = f1.multipliedBy(f2);
-    result.print();
-    cout << endl;
-
-    cout << "The quotient of ";
-    f1.print();
-    cout << " and ";
-    f2.print();
-    cout << " is ";
-    result = f1.dividedBy(f2);
-    result.print();
-    cout << endl;
-
-    cout << "The sum of ";
-    f1.print();
-    cout << " and ";
-    f2.print();
-    cout << " is ";
-    result = f1.addedTo(f2);
-    result.print();
-    cout << endl;
-
-    cout << "The difference of ";
-    f1.print();
-    cout << " and ";
-    f2.print();
-    cout << " is ";
-    result = f1.subtract(f2);
-    result.print();
-    cout << endl;
-
-    if (f1.isEqualTo(f2)){
-        cout << "The two Fractions are equal." << endl;
-    } else {
-        cout << "The two Fractions are not equal." << endl;
-    }
 }
 
 
