@@ -15,19 +15,19 @@
 
 
 Assignment 10.1 [45 points]
-For this assignment you will be building on the Fraction class
+For this assignment you will be building on the fraction class
 you began last week. You'll be making FIVE(Actually 7)
 major changes to the class.
 
-1. Delete your set() function.
+[X]Delete your set() function.
    Add two constructors, a default constructor
    (a constructor that takes no parameters) and
    a parameterized constructor (a constructor that takes parameters).
-   The default constructor assigns the value 0 to the Fraction.
+   The default constructor assigns the value 0 to the fraction.
    In the parameterized constructor, the first parameter will
-   represent the initial numerator of the Fraction,
+   represent the initial numerator of the fraction,
    and the second parameter will represent the initial denominator
-   of the Fraction.
+   of the fraction.
 
 2. Since Fractions cannot have denominators of 0,
    the default constructor should assign 0 to the numerator and
@@ -56,14 +56,14 @@ major changes to the class.
 
 As you can see from the sample output given below,
 you are still not required to change improper Fractions
-into mixed numbers for printing. Just print it as an improper Fraction.
+into mixed numbers for printing. Just print it as an improper fraction.
 
-Make sure that your class will reduce ANY Fraction,
+Make sure that your class will reduce ANY fraction,
 not just the Fractions that are tested in the provided client program.
 Fractions should not be simply reduced upon output,
 they should be stored in reduced form at all times.
 
-In other words, you should ensure that all Fraction objects are reduced
+In other words, you should ensure that all fraction objects are reduced
 before the end of any member function.
 You are also not required to deal with negative numbers,
 either in the numerator or the denominator.
@@ -75,7 +75,7 @@ either in the numerator or the denominator.
     Euclid's algorithm. Don't worry about being efficient.
     It's fine to have your function check every possible factor,
     even if it would be more efficient to just check prime numbers.
-    Just create something of your own that works correctly on ANY Fraction.
+    Just create something of your own that works correctly on ANY fraction.
 
     Note: this part of the assignment is worth 5 points.
     If you are having trouble keeping up with the class,
@@ -108,9 +108,9 @@ using namespace std;
 
 int main()
 {
-    Fraction f1(9,8);
-    Fraction f2(2,3);
-    Fraction result;
+    fraction f1(9,8);
+    fraction f2(2,3);
+    fraction result;
 
     cout << "The result starts off at ";
     result.print();
@@ -158,8 +158,8 @@ int main()
         cout << "The two Fractions are not equal." << endl;
     }
 
-    const Fraction f3(12, 8);
-    const Fraction f4(202, 303);
+    const fraction f3(12, 8);
+    const fraction f4(202, 303);
     result = f3.multipliedBy(f4);
     cout << "The product of ";
     f3.print();
@@ -186,173 +186,74 @@ Changing the client program will result in a grade of 0 on the project.
 
 #include <iostream>
 #include <cassert>
+#include "fraction.h"
 using namespace std;
-
-class Fraction {
-    public:
-        //void set(int inNumerator, int inDenominator);
-        Fraction();
-        Fraction( int inNumerator, int inDenominator );
-        void print();
-        Fraction addedTo( Fraction otherFraction );
-        Fraction subtract( Fraction otherFraction );
-        Fraction multipliedBy( Fraction otherFraction );
-        Fraction dividedBy( Fraction otherFraction );
-        bool isEqualTo( Fraction otherFraction );
-
-    private:
-        int numerator;
-        int denominator;
-        void simplify();
-        Fraction addOrSubtract(bool isAddition, Fraction otherFraction);
-};
-
-
-
-
-
-
-/**
- * The default constructor, which assigns a default value of 0/1
- */
-Fraction::Fraction() {
-    numerator = 0;
-    denominator = 1;
-}
-
-
-
-
-
-
-/**
- * The parameterized constructor that checks if the denominator is 0
- */
- Fraction::Fraction(int inNumerator, int inDenominator) {
-     assert(inDenominator != 0);
-     numerator = inNumerator;
-     denominator = inDenominator;
-     simplify();
- }
-
-
-
-
-
-
-
-void Fraction::print() {
-    cout << numerator << "/" << denominator;
-}
-
-
-
-
-
-
-/**
- * Simplifies this Fraction
- */
-void Fraction::simplify() {
-    //First: check for negative numerators or denominators
-    //       if both are negative, make positive
-    //       if denominator is negative and numerator positive,
-    //              make numerator negative and denominator positive
-    //Second:Before simplifying, check if the numerator is negative
-    //       if so, mark a flag as negative, since you'll be working with
-    //         the absolute value of both the numerator
-    //Third: Find the smallest value between the numerator and denominator
-    //
-    //Fourth:Use a decremental for-loop and a nest conditional statement
-    //       to determine if BOTH the numerator and denominator are divisible
-    //       by the for-loop's variable.
-    //       REMEMBER: the loop has to decrement until it reaches 2, not 1
-}
-
-
-
-
-
-
-/**
- *
- * @param isAddition
- * @param otherFraction
- * @return
- */
-Fraction Fraction::addOrSubtract(bool isAddition, Fraction otherFraction) {
-    int crossMultiply1 = numerator * otherFraction.denominator;
-    int crossMultiply2 = denominator * otherFraction.numerator;
-    int commonDenominator = denominator * otherFraction.denominator;
-    int results = (isAddition)? (crossMultiply1 + crossMultiply2) :
-                                (crossMultiply1 - crossMultiply2);
-    Fraction temp(results, commonDenominator);
-    return temp;
-}
-
-
-
-
-
-
-
-Fraction Fraction::addedTo(Fraction otherFraction) {
-    return addOrSubtract(true, otherFraction);
-}
-
-
-
-
-
-
-
-Fraction Fraction::subtract(Fraction otherFraction) {
-    return addOrSubtract(false, otherFraction);
-}
-
-
-
-
-
-
-
-Fraction Fraction::multipliedBy(Fraction otherFraction) {
-    Fraction temp((numerator * otherFraction.numerator),
-                  (denominator * otherFraction.denominator));
-    return temp;
-}
-
-
-
-
-
-
-
-Fraction Fraction::dividedBy(Fraction otherFraction) {
-    Fraction temp((numerator * otherFraction.denominator),
-                  (denominator * otherFraction.numerator));
-    return temp;
-}
-
-
-
-
-
-
-
-bool Fraction::isEqualTo(Fraction otherFraction) {
-    return (numerator * otherFraction.denominator ) ==
-           (denominator * otherFraction.numerator);
-}
-
-
-
-
 
 
 int main() {
-    Fraction f1(2,4);
+    //TODO: Put code in 3 files instead of one
+    //TODO: Insert consts throughout function declarations
+    //TODO: DON'T FORGET TO UNCOMMENT AND TEST THE LAST PORTION OF MAIN!!!!
+    fraction f1(9,8);
+    fraction f2(2,3);
+    fraction result;
+
+    cout << "The result starts off at ";
+    result.print();
+    cout << endl;
+
+    cout << "The product of ";
     f1.print();
+    cout << " and ";
+    f2.print();
+    cout << " is ";
+    result = f1.multipliedBy(f2);
+    result.print();
+    cout << endl;
+
+    cout << "The quotient of ";
+    f1.print();
+    cout << " and ";
+    f2.print();
+    cout << " is ";
+    result = f1.dividedBy(f2);
+    result.print();
+    cout << endl;
+
+    cout << "The sum of ";
+    f1.print();
+    cout << " and ";
+    f2.print();
+    cout << " is ";
+    result = f1.addedTo(f2);
+    result.print();
+    cout << endl;
+
+    cout << "The difference of ";
+    f1.print();
+    cout << " and ";
+    f2.print();
+    cout << " is ";
+    result = f1.subtract(f2);
+    result.print();
+    cout << endl;
+
+    if (f1.isEqualTo(f2)){
+        cout << "The two Fractions are equal." << endl;
+    } else {
+        cout << "The two Fractions are not equal." << endl;
+    }
+
+//    const fraction f3(12, 8);
+//    const fraction f4(202, 303);
+//    result = f3.multipliedBy(f4);
+//    cout << "The product of ";
+//    f3.print();
+//    cout << " and ";
+//    f4.print();
+//    cout << " is ";
+//    result.print();
+//    cout << endl;
 }
 
 
