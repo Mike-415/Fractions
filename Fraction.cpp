@@ -4,9 +4,9 @@ using namespace std;
 
 
 
-/**
- * The default constructor, which assigns a default value of 0/1
- */
+
+
+
 Fraction::Fraction() {
     numerator = 0;
     denominator = 1;
@@ -17,11 +17,7 @@ Fraction::Fraction() {
 
 
 
-/**
- * The parameterized constructor that checks if the denominator is 0
- * @param inNumerator represents the numerator
- * @param inDenominator represents the denominator
- */
+
 Fraction::Fraction(int inNumerator, int inDenominator) {
     assert(inDenominator != 0);
     numerator = inNumerator;
@@ -35,10 +31,7 @@ Fraction::Fraction(int inNumerator, int inDenominator) {
 
 
 
-/**
- * displays the data members in the following format:
- *    <numerator> / <denominator>
- */
+
 void Fraction::print() const {
     cout << numerator << "/" << denominator;
 }
@@ -49,7 +42,7 @@ void Fraction::print() const {
 
 
 /**
- * Simplifies this Fraction to the lowest common multiple
+ * Simplifies this Fraction
  */
 void Fraction::simplify() {
     bool isNegative = fractionNegative();
@@ -128,13 +121,7 @@ Fraction Fraction::addOrSubtract(bool isAddition, const Fraction &otherFraction)
 
 
 
-/**
- * Adds the calling object to the other fraction object
- *
- * @param otherFraction represent the fraction object passed into
- *        'this' calling object
- * @return the simplified sum of both fractions
- */
+
 Fraction Fraction::addedTo(const Fraction &otherFraction) const {
     return addOrSubtract(true, otherFraction);
 }
@@ -145,13 +132,7 @@ Fraction Fraction::addedTo(const Fraction &otherFraction) const {
 
 
 
-/**
- * Subtracts the calling object to the other fraction object
- *
- * @param otherFraction represent the fraction object passed into
- *        'this' calling object
- * @return the simplified difference of both fractions
- */
+
 Fraction Fraction::subtract( const Fraction &otherFraction) const {
     return addOrSubtract(false, otherFraction);
 }
@@ -162,13 +143,7 @@ Fraction Fraction::subtract( const Fraction &otherFraction) const {
 
 
 
-/**
- * Multiplies the calling object to the other fraction object
- *
- * @param otherFraction represent the fraction object passed into
- *        'this' calling object
- * @return the simplified product of both fractions
- */
+
 Fraction Fraction::multipliedBy( const Fraction &otherFraction) const {
     Fraction temp((numerator * otherFraction.numerator),
                   (denominator * otherFraction.denominator));
@@ -182,13 +157,7 @@ Fraction Fraction::multipliedBy( const Fraction &otherFraction) const {
 
 
 
-/**
- * Divides the calling object to the other fraction object
- *
- * @param otherFraction represent the fraction object passed into
- *        'this' calling object
- * @return the simplified quotient of both fractions
- */
+
 Fraction Fraction::dividedBy( const Fraction &otherFraction) const {
     Fraction temp((numerator * otherFraction.denominator),
                   (denominator * otherFraction.numerator));
@@ -202,13 +171,7 @@ Fraction Fraction::dividedBy( const Fraction &otherFraction) const {
 
 
 
-/**
- * Determines if the calling object is equal to the other fraction object
- *
- * @param otherFraction represent the fraction object passed into
- *        'this' calling object
- * @return true if the calling object is equal to the other fraction object
- */
+
 bool Fraction::isEqualTo( const Fraction &otherFraction) const {
     return (numerator * otherFraction.denominator ) ==
            (denominator * otherFraction.numerator);
