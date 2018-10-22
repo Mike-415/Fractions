@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Fraction.h"
+#include "fraction.h"
 using namespace std;
 
 
@@ -7,7 +7,7 @@ using namespace std;
 
 
 
-Fraction::Fraction() {
+fraction::fraction() {
     numerator = 0;
     denominator = 1;
 }
@@ -18,7 +18,7 @@ Fraction::Fraction() {
 
 
 
-Fraction::Fraction(int inNumerator, int inDenominator) {
+fraction::fraction(int inNumerator, int inDenominator) {
     assert(inDenominator != 0);
     numerator = inNumerator;
     denominator = inDenominator;
@@ -32,7 +32,7 @@ Fraction::Fraction(int inNumerator, int inDenominator) {
 
 
 
-void Fraction::print() const {
+void fraction::print() const {
     cout << numerator << "/" << denominator;
 }
 
@@ -44,7 +44,7 @@ void Fraction::print() const {
 /**
  * Simplifies this Fraction
  */
-void Fraction::simplify() {
+void fraction::simplify() {
     bool isNegative = fractionNegative();
     int absNumerator = abs(numerator);
     int smallestValue = (absNumerator < denominator)? absNumerator : denominator;
@@ -69,7 +69,7 @@ void Fraction::simplify() {
  * so that only the numerator is negative.
  * @return true if the fraction is negative
  */
-bool Fraction::fractionNegative() {
+bool fraction::fractionNegative() {
     // -/+
     if(numerator < 0 && denominator > 0 ){
         return true;
@@ -104,13 +104,13 @@ bool Fraction::fractionNegative() {
  * @return A new fraction object that represents
  *         either the simplified difference or sum
  */
-Fraction Fraction::addOrSubtract(bool isAddition, const Fraction &otherFraction) const {
+fraction fraction::addOrSubtract(bool isAddition, const fraction &otherFraction) const {
     int crossMultiply1 = numerator * otherFraction.denominator;
     int crossMultiply2 = denominator * otherFraction.numerator;
     int commonDenominator = denominator * otherFraction.denominator;
     int results = (isAddition)? (crossMultiply1 + crossMultiply2) :
                   (crossMultiply1 - crossMultiply2);
-    Fraction temp(results, commonDenominator);
+    fraction temp(results, commonDenominator);
     temp.simplify();
     return temp;
 }
@@ -122,7 +122,7 @@ Fraction Fraction::addOrSubtract(bool isAddition, const Fraction &otherFraction)
 
 
 
-Fraction Fraction::addedTo(const Fraction &otherFraction) const {
+fraction fraction::addedTo(const fraction &otherFraction) const {
     return addOrSubtract(true, otherFraction);
 }
 
@@ -133,7 +133,7 @@ Fraction Fraction::addedTo(const Fraction &otherFraction) const {
 
 
 
-Fraction Fraction::subtract( const Fraction &otherFraction) const {
+fraction fraction::subtract( const fraction &otherFraction) const {
     return addOrSubtract(false, otherFraction);
 }
 
@@ -144,8 +144,8 @@ Fraction Fraction::subtract( const Fraction &otherFraction) const {
 
 
 
-Fraction Fraction::multipliedBy( const Fraction &otherFraction) const {
-    Fraction temp((numerator * otherFraction.numerator),
+fraction fraction::multipliedBy( const fraction &otherFraction) const {
+    fraction temp((numerator * otherFraction.numerator),
                   (denominator * otherFraction.denominator));
     temp.simplify();
     return temp;
@@ -158,8 +158,8 @@ Fraction Fraction::multipliedBy( const Fraction &otherFraction) const {
 
 
 
-Fraction Fraction::dividedBy( const Fraction &otherFraction) const {
-    Fraction temp((numerator * otherFraction.denominator),
+fraction fraction::dividedBy( const fraction &otherFraction) const {
+    fraction temp((numerator * otherFraction.denominator),
                   (denominator * otherFraction.numerator));
     temp.simplify();
     return temp;
@@ -172,7 +172,7 @@ Fraction Fraction::dividedBy( const Fraction &otherFraction) const {
 
 
 
-bool Fraction::isEqualTo( const Fraction &otherFraction) const {
+bool fraction::isEqualTo( const fraction &otherFraction) const {
     return (numerator * otherFraction.denominator ) ==
            (denominator * otherFraction.numerator);
 }
