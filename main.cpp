@@ -15,7 +15,7 @@
 
 
 Assignment 10.1 [45 points]
-For this assignment you will be building on the fraction class
+For this assignment you will be building on the Fraction class
 you began last week. You'll be making FIVE(Actually 7)
 major changes to the class.
 
@@ -23,11 +23,11 @@ major changes to the class.
    Add two constructors, a default constructor
    (a constructor that takes no parameters) and
    a parameterized constructor (a constructor that takes parameters).
-   The default constructor assigns the value 0 to the fraction.
+   The default constructor assigns the value 0 to the Fraction.
    In the parameterized constructor, the first parameter will
-   represent the initial numerator of the fraction,
+   represent the initial numerator of the Fraction,
    and the second parameter will represent the initial denominator
-   of the fraction.
+   of the Fraction.
 
 2. Since Fractions cannot have denominators of 0,
    the default constructor should assign 0 to the numerator and
@@ -56,14 +56,14 @@ major changes to the class.
 
 As you can see from the sample output given below,
 you are still not required to change improper Fractions
-into mixed numbers for printing. Just print it as an improper fraction.
+into mixed numbers for printing. Just print it as an improper Fraction.
 
-Make sure that your class will reduce ANY fraction,
+Make sure that your class will reduce ANY Fraction,
 not just the Fractions that are tested in the provided client program.
 Fractions should not be simply reduced upon output,
 they should be stored in reduced form at all times.
 
-In other words, you should ensure that all fraction objects are reduced
+In other words, you should ensure that all Fraction objects are reduced
 before the end of any member function.
 You are also not required to deal with negative numbers,
 either in the numerator or the denominator.
@@ -75,15 +75,15 @@ either in the numerator or the denominator.
     Euclid's algorithm. Don't worry about being efficient.
     It's fine to have your function check every possible factor,
     even if it would be more efficient to just check prime numbers.
-    Just create something of your own that works correctly on ANY fraction.
+    Just create something of your own that works correctly on ANY Fraction.
 
     Note: this part of the assignment is worth 5 points.
     If you are having trouble keeping up with the class,
     I suggest you skip this part and take the 5 point deduction.
 
 6.  Put the client program in a separate file from the class,
-    and divide the class into specification file (fraction.h)
-    and implementation file (fraction.cpp), so your code will be
+    and divide the class into specification file (Fraction.h)
+    and implementation file (Fraction.cpp), so your code will be
     in 3 separate files.
 
 7.  Add documentation to your assignment. Be sure to
@@ -103,14 +103,14 @@ is run with your class is also given below, so that you can check your results. 
 Here is the client program.
 
 #include <iostream>
-#include "fraction.h"
+#include "Fraction.h"
 using namespace std;
 
 int main()
 {
-    fraction f1(9,8);
-    fraction f2(2,3);
-    fraction result;
+    Fraction f1(9,8);
+    Fraction f2(2,3);
+    Fraction result;
 
     cout << "The result starts off at ";
     result.print();
@@ -158,8 +158,8 @@ int main()
         cout << "The two Fractions are not equal." << endl;
     }
 
-    const fraction f3(12, 8);
-    const fraction f4(202, 303);
+    const Fraction f3(12, 8);
+    const Fraction f4(202, 303);
     result = f3.multipliedBy(f4);
     cout << "The product of ";
     f3.print();
@@ -186,17 +186,14 @@ Changing the client program will result in a grade of 0 on the project.
 
 #include <iostream>
 #include <cassert>
-#include "fraction.h"
+#include "Fraction.h"
 using namespace std;
 
 
 int main() {
-    //TODO: Put code in 3 files instead of one
-    //TODO: Insert consts throughout function declarations
-    //TODO: DON'T FORGET TO UNCOMMENT AND TEST THE LAST PORTION OF MAIN!!!!
-    fraction f1(9,8);
-    fraction f2(2,3);
-    fraction result;
+    Fraction f1(9,8);
+    Fraction f2(2,3);
+    Fraction result;
 
     cout << "The result starts off at ";
     result.print();
@@ -244,16 +241,16 @@ int main() {
         cout << "The two Fractions are not equal." << endl;
     }
 
-//    const fraction f3(12, 8);
-//    const fraction f4(202, 303);
-//    result = f3.multipliedBy(f4);
-//    cout << "The product of ";
-//    f3.print();
-//    cout << " and ";
-//    f4.print();
-//    cout << " is ";
-//    result.print();
-//    cout << endl;
+    const Fraction f3(12, 8);
+    const Fraction f4(202, 303);
+    result = f3.multipliedBy(f4);
+    cout << "The product of ";
+    f3.print();
+    cout << " and ";
+    f4.print();
+    cout << " is ";
+    result.print();
+    cout << endl;
 }
 
 
