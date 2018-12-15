@@ -2,6 +2,10 @@
 #define UNTITLED2_FRACTION_H
 
 /*
+    Name:       Michael Gonzalez
+    Class:      cs110b
+    Instructor: Dave Harden
+    File:       fraction.h
 
     The fraction class can be used to create objects that store a numerator and a denominator.
     The following functions are available:

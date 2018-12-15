@@ -1,13 +1,13 @@
 #include <iostream>
 #include <cassert>
-#include "Fraction.h"
+#include "fraction.h"
 using namespace std;
 
 
 int main() {
-    Fraction f1(9,8);
-    Fraction f2(2,3);
-    Fraction result;
+    fraction f1(9,8);
+    fraction f2(2,3);
+    fraction result;
 
     cout << "The result starts off at ";
     result.print();
@@ -55,8 +55,8 @@ int main() {
         cout << "The two Fractions are not equal." << endl;
     }
 
-    const Fraction f3(12, 8);
-    const Fraction f4(202, 303);
+    const fraction f3(12, 8);
+    const fraction f4(202, 303);
     result = f3.multipliedBy(f4);
     cout << "The product of ";
     f3.print();
